@@ -14,11 +14,13 @@ class Index extends Component
 {
 
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     
     public $title, $cur_id, $name, $slug, $sap_product_code, $web_product_code, $v_name;
     public $cur_view, $variants = [];
     public $categories = [], $categories_select;
-    public $filter, $selected = [];
+    public $selected = [];
+    public $filter = '';
 
     public function mount(){
         $this->cur_view = "list";

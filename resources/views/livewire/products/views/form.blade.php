@@ -7,7 +7,7 @@
                         {{ $title }}
                     </h2>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 mb-2">
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
@@ -65,19 +65,19 @@
                     </span>
                 </div>
                 @foreach($variants AS $k=>$v)
-                    <div class="col-md-3">
+                    <div @if(isset($v['id'])) class="col-md-3" @else class="col-md-4" @endif>
                         <div class="mb-3">
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control" name="v_name" wire:model.defer="variants.{{ $k }}.v_name">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div @if(isset($v['id'])) class="col-md-3" @else class="col-md-4" @endif>
                         <div class="mb-3">
                             <label class="form-label">Sap Product Code</label>
                             <input type="text" class="form-control" name="sap_product_code" wire:model.defer="variants.{{ $k }}.sap_product_code">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div @if(isset($v['id'])) class="col-md-3" @else class="col-md-4" @endif>
                         <div class="mb-3">
                             <label class="form-label">Web Product Code</label>
                             <input type="text" class="form-control" name="web_product_code" wire:model.defer="variants.{{ $k }}.web_product_code">
