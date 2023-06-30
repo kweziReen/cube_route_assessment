@@ -7,12 +7,14 @@ use App\Models\Product;
 use App\Models\Variant;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
 class Index extends Component
 {
 
-
+    use WithPagination;
+    
     public $title, $cur_id, $name, $slug, $sap_product_code, $web_product_code, $v_name;
     public $cur_view, $variants = [];
     public $categories = [], $categories_select;
@@ -168,9 +170,15 @@ class Index extends Component
 
     public function render()
     {
+        $query = Product::query();
+
         if ($this->filter) {
-            $category = Category::find($this->filter);
-            $products = $category->products()->paginate(30) ;
+            $query->whereHas('categories', function ($query) {
+                $query->where('id', $this->filter);
+            });
+
+            $products = $query->orderBy('name', 'asc')->paginate(30);
+            
         }else{
             $products = Product::orderBy('name', 'asc')->paginate(30);
         }
